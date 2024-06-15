@@ -1,0 +1,13 @@
+/* body {
+    background-image: url('../../../public/img/Fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 4px 8px rgba(231, 211, 211, 0.2);
+  } */
+  
+  .boxLogin {
+    background-color: rgb(255, 255, 255);
+    padding: 40px; 
+    border-radius: 10px;
+    margin: 15px;
+  }
