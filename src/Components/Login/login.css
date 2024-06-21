@@ -1,14 +1,41 @@
-/* body {
-  background-image: url('../../../public/img/Fondo2.jpg');
-  background-repeat: no-repeat;
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.image-container {
+  background-image: url('../../../public/img/Fondo4.jpg');
   background-size: cover;
-  box-shadow: inset 0 0 80px #000000; 
-} */
+  background-position: center;
+  flex: 1;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
 
 .boxLogin {
   background-color: rgb(255, 255, 255);
   padding: 40px; 
   border-radius: 10px;
-  margin: 15px;
-  box-shadow: 0 4px 8px rgba(231, 211, 211, 0.2);
+}
+
+
+@media (max-width: 768px) {
+  .image-container {
+    display: none;
+  }
+
+  .main-container {
+    flex-direction: column;
+  }
 }

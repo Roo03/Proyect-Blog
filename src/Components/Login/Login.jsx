@@ -71,122 +71,126 @@ function Login() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        className="boxLogin"
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundColor: "#FFFFF",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Desmadre yucateco
-        </Typography>
-        <Typography variant="body2" color="textSecondary">
-          El blog #1 de los yucatercos
-        </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
-          <TextField
-            onChange={(e) => setEmail(e.target.value)}
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            error={!!emailError}
-            helperText={emailError}
-          />
-          <TextField
-            onChange={(e) => setPassword(e.target.value)}
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            error={!!passwordError}
-            helperText={passwordError}
-          />
-          {loginError && (
-            <Typography variant="body2" color="error" align="center" sx={{ mt: 1 }}>
-              {loginError}
+    <div className="main-container">
+      <div className="image-container"></div>
+      <div className="login-container">
+        <Container component="main" maxWidth="xs">
+          <Box
+            className="boxLogin"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#FFFFF",
+            }}
+          >
+            <Typography component="h1" variant="h5">
+              Desmadre yucateco
             </Typography>
-          )}
-          <Button
-            onClick={(e) => handleLogin(e)}
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            <Typography variant="body2" color="textSecondary">
+              El blog #1 de los yucatecos
+            </Typography>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
+              <TextField
+                onChange={(e) => setEmail(e.target.value)}
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                error={!!emailError}
+                helperText={emailError}
+              />
+              <TextField
+                onChange={(e) => setPassword(e.target.value)}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                error={!!passwordError}
+                helperText={passwordError}
+              />
+              {loginError && (
+                <Typography variant="body2" color="error" align="center" sx={{ mt: 1 }}>
+                  {loginError}
+                </Typography>
+              )}
+              <Button
+                onClick={(e) => handleLogin(e)}
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Iniciar sesión
+              </Button>
+              <Button 
+                onClick={(e) => handleGoogle(e)} 
+                className="button"
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Iniciar sesión con Google
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Typography variant="body2">
+                    <MuiLink component={RouterLink} to="/Register" variant="body2">
+                      ¿No tienes una cuenta? Regístrate aquí
+                    </MuiLink>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+          <Modal
+            open={showLoginModal}
+            onClose={handleCloseModal}
+            aria-labelledby="login-modal-title"
+            aria-describedby="login-modal-description"
           >
-            Iniciar sesión
-          </Button>
-          <Button 
-            onClick={(e) => handleGoogle(e)} 
-            className="button"
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Iniciar sesión con Google
-          </Button>
-          <Grid container>
-            <Grid item>
-              <Typography variant="body2">
-                <MuiLink component={RouterLink} to="/Register" variant="body2">
-                  ¿No tienes una cuenta? Regístrate aquí
-                </MuiLink>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 300,
+                bgcolor: 'background.paper',
+                border: '2px solid #000',
+                boxShadow: 24,
+                p: 4,
+              }}
+            >
+              <Typography id="login-modal-title" variant="h6" component="h2">
+                Sesión iniciada correctamente
               </Typography>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-      <Modal
-        open={showLoginModal}
-        onClose={handleCloseModal}
-        aria-labelledby="login-modal-title"
-        aria-describedby="login-modal-description"
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 300,
-            bgcolor: 'background.paper',
-            border: '2px solid #000',
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <Typography id="login-modal-title" variant="h6" component="h2">
-            Sesión iniciada correctamente
-          </Typography>
-          <Typography id="login-modal-description" sx={{ mt: 2 }}>
-            Has iniciado sesión exitosamente.
-          </Typography>
-          <Button
-            onClick={handleCloseModal}
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3 }}
-            component={RouterLink} to="/"
-          >
-            Continuar
-          </Button>
-        </Box>
-      </Modal>
-    </Container>
+              <Typography id="login-modal-description" sx={{ mt: 2 }}>
+                Has iniciado sesión exitosamente.
+              </Typography>
+              <Button
+                onClick={handleCloseModal}
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3 }}
+                component={RouterLink} to="/"
+              >
+                Continuar
+              </Button>
+            </Box>
+          </Modal>
+        </Container>
+      </div>
+    </div>
   );
 }
 

@@ -37,16 +37,16 @@ function Profile({ profile }) {
         <Box sx={{ width: '100%', maxWidth: 1300 }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography color={"#ffff"} variant="h4">
+              <Typography color={"#060505"} variant="h4">
               {displayName && <h5>Bienvenido de vuelta : {displayName}</h5>}
               </Typography>
-              <Typography color={"#ffff"} variant="body1">
+              <Typography color={"#050404"} variant="body1">
                 Hola amigos, ¿cómo están?
               </Typography>
             </Box>
           </Box>
           <Box sx={{ mt: 4, textAlign: 'center' }}>
-            <Typography  color={"#ffff"} variant="h2">
+            <Typography  color={"#040404"} variant="h2">
               Mis publicaciones
             </Typography>
           </Box>

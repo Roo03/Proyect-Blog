@@ -4,21 +4,25 @@ import {
   Button, 
   InputBase, 
   Typography, 
+  Card, 
+  CardContent, 
+  CardMedia, 
   IconButton,
-  Card,
-  CardContent,
-  CardMedia,
 } from "@mui/material";
 import LocalSeeIcon from '@mui/icons-material/LocalSee';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useAuth } from "../context/authContext"; // Importamos useAuth
 import Modal from "./Modal"; 
 import "./compartir.css"; 
 
 export default function Share() {
+  const auth = useAuth();
   const [file, setFile] = useState(null);
   const [text, setText] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [sharedText, setSharedText] = useState("");
   const [sharedImage, setSharedImage] = useState(null);
+  const [posts, setPosts] = useState([]); // Estado para las publicaciones
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -32,13 +36,24 @@ export default function Share() {
     setShowModal(false);
   };
 
-  const handleShare = () => {
-    if (sharedImage) {
-      console.log("Foto compartida:", sharedImage);
-      console.log("Texto compartido:", sharedText);
+  const handleShare = async () => {
+    if (sharedImage || sharedText) {
+      const newPost = {
+        id: Date.now(), // ID único para cada publicación
+        text: sharedText,
+        image: sharedImage ? URL.createObjectURL(sharedImage) : null,
+        userName: auth.user?.displayName || "Anónimo",
+      };
+      setPosts([...posts, newPost]);
+      setSharedText("");
+      setSharedImage(null);
     } else {
-      console.log("No se ha seleccionado ninguna foto.");
+      console.log("No se ha seleccionado ninguna foto o texto.");
     }
+  };
+
+  const handleDeletePost = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
   };
 
   return (
@@ -76,17 +91,32 @@ export default function Share() {
             Compártelo
           </Button>
         </Box>
-        {sharedImage && (
-          <Card sx={{ mt: 2 }}>
+      </CardContent>
+
+      {posts.map(post => (
+        <Card key={post.id} sx={{ mt: 2 }}>
+          <CardContent>
+            <Typography variant="h6" component="div">
+              {post.userName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {post.text}
+            </Typography>
+          </CardContent>
+          {post.image && (
             <CardMedia
               component="img"
-              image={URL.createObjectURL(sharedImage)}
+              image={post.image}
               alt="Shared"
               sx={{ maxHeight: 300, borderRadius: 1 }}
             />
-          </Card>
-        )}
-      </CardContent>
+          )}
+          <IconButton onClick={() => handleDeletePost(post.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </Card>
+      ))}
+
       {showModal && (
         <Modal
           file={file}

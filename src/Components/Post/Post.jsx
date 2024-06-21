@@ -4,6 +4,7 @@ import { useState } from "react";
 import Modal from "./Modal"; 
 import { Button, Typography } from "@mui/material";
 import { useAuth } from "../context/authContext";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Post({ post }) {
   const [showModal, setShowModal] = useState(false); 
@@ -25,7 +26,7 @@ export default function Post({ post }) {
         <div className="postBody">
           <div className="postLeft">
             <div className="postCenter">
-            <span className="postText">ola amigos del feis, aqui en mi uni</span>
+              <span className="postText">ola amigos del feis, aqui en mi uni</span>
               <img
                 src="/img/UTM.jpg" 
                 className="postImg"
@@ -35,11 +36,13 @@ export default function Post({ post }) {
           </div>
           <div className="postRight">
             <div className="postComments">
-
+            <Button>
+                <DeleteIcon />
+              </Button>
               <Button className="postCommentButton" onClick={handleOpenModal}>
                 Ver comentarios
               </Button>
-
+            
               {showModal && <Modal onClose={() => setShowModal(false)} />}
             </div>
           </div>

@@ -1,3 +1,5 @@
 .ContainerProf {
     margin-top: 10px;
+    align-content: center;
+    flex-direction: column;
 }
